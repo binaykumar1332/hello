@@ -5,6 +5,9 @@ const proxy = httpProxy.createProxy();
 
 app.use((req, res) => {
   const name = req.hostname;
+  if(name === "worldtoday.me"){
+    proxy.web(req, res, { target: `https://worldtoday.me`, changeOrigin: true});
+  }
   const sub = name.split(".")[0];
   proxy.web(req, res, { target: `https://worldtoday.me/${sub}`, changeOrigin: true});
 });
