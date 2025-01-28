@@ -5,14 +5,8 @@ const proxy = httpProxy.createProxy();
 
 app.use((req, res) => {
   const name = req.hostname;
-  if (name === "worldtoday.me") {
-    // If the domain is worldtoday.me, return the root path
-    return res.redirect("/");
-  } else {
-    // If it's a subdomain, extract the subdomain and proxy the request
-    const sub = name.split(".")[0];
-    proxy.web(req, res, { target: `https://worldtoday.me/${sub}` });
-  }
+  const sub = name.split(".")[0];
+  proxy.web(req, res, { target: `https://worldtoday.me/${sub}`, changeOrigin: true });
 });
 
 app.get("/", (req, res) => {
