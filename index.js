@@ -6,19 +6,11 @@ const proxy = httpProxy.createProxy();
 app.use((req, res) => {
   const name = req.hostname;
 const sub = name.split(".")[0]
- return  proxy.web(req, res, {target: `https://the-gangsta.tech`})
+  console.log(sub)
+return  proxy.web(req, res, {target: `https://the-gangsta.tech`, changeOrigin: true})
   
 });
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
-
-app.get("/:sub", (req, res) => {
-  const sub = req.params.sub;
-  res.send(`${sub} is here`);
-});
-
-app.listen(4000, () => {
+app.listen(3000, () => {
   console.log("Server running on port 4000");
 });
