@@ -5,14 +5,9 @@ const proxy = httpProxy.createProxy();
 
 app.use((req, res) => {
   const name = req.hostname;
+const sub = name.split(".")[0]
+ return  proxy.web(req, res, {target: `https://the-gangsta.tech`})
   
-  // Avoid proxying the root domain to itself
-  if (name === "worldtoday.me") {
-    proxy.web(req, res, { target: `https://worldtoday.me`, changeOrigin: true });
-  } else {
-    const sub = name.split(".")[0];
-    proxy.web(req, res, { target: `https://worldtoday.me/${sub}`, changeOrigin: true });
-  }
 });
 
 app.get("/", (req, res) => {
