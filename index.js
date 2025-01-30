@@ -7,7 +7,7 @@ import handleSubRoutes from "./routes/SubRoutes.js"; // Fixed typo
 const app = express();
 const proxy = httpProxy.createProxy();
 ConnectDb();
-
+app.set("trust proxy", true); 
 // Middleware for subdomain handling
 app.use((req, res, next) => {
   const name = req.hostname;
