@@ -23,7 +23,6 @@ app.use((req, res, next) => {
     return next();
   }
 
-  console.log(`Subdomain detected: ${sub}`);
   req.subdomain = sub;  // Pass subdomain to the request object
   return proxy.web(req, res, {
     target: `https://worldtoday.me/sub/${sub}`,
